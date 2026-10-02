@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jasneet Gill | Data Science student at WLU</title>
+<meta name="description" content="Second-year Data Science student at Wilfrid Laurier University looking for 2027 internships. Python, R, Java, SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #06284A;
+    --yellow: #FFE135;
+    --pore: #F0BE12;
+    --coral: #FF7A6B;
+    --sand: #F2D39B;
+    --plank: #9C5A1E;
+    --white: #FFFFFF;
+    --sky: #7ADBFF;
+    --sea: #2FA4E7;
+    --deep: #0F6CB0;
+    --head: "Lilita One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+    --body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --sky: #0E4C80; --sea: #08305A; --deep: #041528; }
+  }
+  :root[data-theme="dark"] { --sky: #0E4C80; --sea: #08305A; --deep: #041528; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 5rem); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0; color: var(--navy); font-family: var(--body); font-weight: 600; font-size: 1.0625rem; line-height: 1.6;
+    background: var(--deep);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {            /* the water, fixed behind everything */
+    content: ""; position: fixed; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, var(--sky) 0%, var(--sea) 50%, var(--deep) 100%);
+  }
+  a { color: var(--navy); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+  :focus-visible { outline: 4px solid var(--navy); outline-offset: 3px; border-radius: 10px; box-shadow: 0 0 0 7px var(--white); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; pointer-events: none; }
+  .wrap a, .wrap button, .card, .skill, .year, .contact, .bubble-note { pointer-events: auto; }
+
+  /* ---------- bubbles (click or tap to pop) ---------- */
+  .bubbles { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .bubble {
+    position: absolute; bottom: -90px; border-radius: 50%; pointer-events: auto; cursor: pointer;
+    border: 2px solid rgba(255,255,255,.8);
+    background: radial-gradient(circle at 30% 28%, rgba(255,255,255,.85) 0 12%, rgba(255,255,255,.18) 40%, rgba(255,255,255,.06) 100%);
+    animation: rise var(--dur) linear var(--delay) infinite;
+  }
+  @keyframes rise { from { transform: translate3d(0,0,0); } to { transform: translate3d(var(--drift), calc(-100vh - 180px), 0); } }
+  .bubble.pop { animation: pop .28s ease-out forwards; pointer-events: none; }
+  @keyframes pop { to { transform: scale(1.7); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .bubbles { display: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-block; font-family: var(--head); font-size: 1.1rem; letter-spacing: .01em;
+    padding: .55rem 1.3rem; border-radius: 14px; text-decoration: none; cursor: pointer;
+    color: var(--navy); background: var(--white); border: 4px solid var(--navy);
+    box-shadow: 0 5px 0 var(--navy);
+    transition: transform .1s ease-out, box-shadow .1s ease-out;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--navy); }
+  .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--navy); }
+  .btn.yellow { background: var(--yellow); }
+  .btn.coral { background: var(--coral); }
+  .btn.small { font-size: .98rem; padding: .3rem .95rem; border-width: 3px; border-radius: 12px; box-shadow: 0 4px 0 var(--navy); }
+
+  /* ---------- nav ---------- */
+  nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; padding: .85rem 0; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; }
+  nav li:last-child { margin-left: auto; }
+
+  /* ---------- hero ---------- */
+  header.hero { padding: 2.5rem 0 3.5rem; }
+  .status {
+    display: inline-block; background: var(--coral); border: 4px solid var(--navy); border-radius: 999px;
+    padding: .3rem 1.1rem; font-family: var(--head); font-size: 1.05rem; box-shadow: 0 4px 0 var(--navy);
+    transform: rotate(-2deg); margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-family: var(--head); font-weight: 400; margin: 0 0 1.75rem;
+    font-size: clamp(3.6rem, 15vw, 8.5rem); line-height: .95; letter-spacing: .01em;
+    color: var(--yellow);
+    text-shadow:
+      4px 0 0 var(--navy), -4px 0 0 var(--navy), 0 4px 0 var(--navy), 0 -4px 0 var(--navy),
+      3px 3px 0 var(--navy), -3px -3px 0 var(--navy), 3px -3px 0 var(--navy), -3px 3px 0 var(--navy),
+      8px 12px 0 rgba(6,40,74,.35);
+  }
+  h1 span { display: block; }
+  .speech {
+    position: relative; display: inline-block; max-width: 36rem; margin: 0 0 2rem;
+    background: var(--white); border: 4px solid var(--navy); border-radius: 24px; padding: 1.1rem 1.4rem;
+    box-shadow: 0 6px 0 var(--navy); font-size: 1.2rem; line-height: 1.5; font-weight: 700; pointer-events: auto;
+  }
+  .speech::after {
+    content: ""; position: absolute; left: 2.2rem; bottom: -18px; width: 28px; height: 28px;
+    background: var(--white); border-right: 4px solid var(--navy); border-bottom: 4px solid var(--navy);
+    transform: rotate(45deg) skew(8deg, 8deg); border-bottom-right-radius: 6px;
+  }
+  .speech p { margin: 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+  /* ---------- sections ---------- */
+  section { padding: 2.5rem 0; }
+  h2 {
+    position: relative; display: inline-block; margin: 0 0 2rem; padding: .35rem 1.7rem;
+    font-family: var(--head); font-weight: 400; font-size: 2rem; color: #FFF3D6;
+    background: var(--plank); border: 4px solid var(--navy); border-radius: 14px;
+    box-shadow: 0 5px 0 var(--navy); transform: rotate(-1.2deg); pointer-events: auto;
+  }
+  h2::before, h2::after {   /* nails */
+    content: ""; position: absolute; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%;
+    background: #E9C98F; border: 2px solid var(--navy);
+  }
+  h2::before { left: 7px; } h2::after { right: 7px; }
+  h3 { font-family: var(--head); font-weight: 400; font-size: 1.6rem; margin: 0; letter-spacing: .01em; }
+
+  .sponge {
+    background-color: var(--yellow);
+    background-image:
+      radial-gradient(ellipse 9px 6px at 12% 22%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 6px 8px at 31% 68%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 11px 7px at 47% 18%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 7px 5px at 63% 80%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 8px 10px at 78% 30%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 10px 6px at 90% 72%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 5px 5px at 6% 85%, var(--pore) 98%, transparent),
+      radial-gradient(ellipse 6px 4px at 54% 52%, var(--pore) 98%, transparent);
+  }
+  .card {
+    border: 4px solid var(--navy); border-radius: 22px; box-shadow: 8px 8px 0 var(--navy);
+    transition: transform .12s ease-out, box-shadow .12s ease-out;
+  }
+  .card:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--navy); }
+
+  .projects { display: grid; gap: 1.75rem; grid-template-columns: repeat(2, 1fr); }
+  .project { padding: 1.6rem; }
+  .project.feature { grid-column: 1 / -1; padding: 2rem; }
+  .project p { margin: .6rem 0 1rem; max-width: 64ch; }
+  .project.ghost { background: var(--sand); border-style: dashed; }
+  .tags { list-style: none; margin: 0 0 1.1rem; padding: 0; display: flex; flex-wrap: wrap; gap: .45rem; }
+  .tags li { background: var(--white); border: 3px solid var(--navy); font-size: .85rem; font-weight: 800; padding: .05rem .7rem; border-radius: 999px; }
+  .links { display: flex; flex-wrap: wrap; gap: .8rem; }
+  @media (max-width: 700px) { .projects { grid-template-columns: 1fr; } }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 1.1rem; margin: 0 0 1.75rem; padding: 0; list-style: none; }
+  .skill {
+    padding: .55rem 1.3rem; font-family: var(--head); font-size: 1.4rem; border-radius: 16px;
+    border: 4px solid var(--navy); box-shadow: 0 5px 0 var(--navy); cursor: default;
+  }
+  .skill:nth-child(odd) { transform: rotate(-2deg); }
+  .skill:nth-child(even) { transform: rotate(1.8deg); }
+  .skill:hover { animation: wiggle .45s ease-in-out; }
+  @keyframes wiggle { 0%,100% { rotate: 0deg; } 25% { rotate: -5deg; } 75% { rotate: 5deg; } }
+  .also {
+    display: inline-block; margin: 0; padding: .45rem 1.1rem; background: var(--white);
+    border: 3px solid var(--navy); border-radius: 14px; pointer-events: auto;
+  }
+
+  .years { display: grid; gap: 1.75rem; grid-template-columns: repeat(2, 1fr); }
+  .year { background: var(--sand); padding: 1.5rem; }
+  .year h3 { margin-bottom: 1rem; }
+  .courses { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem; }
+  .courses li { font-weight: 800; font-size: .95rem; padding: .15rem .85rem; border-radius: 999px; background: var(--white); border: 3px solid var(--navy); }
+  .school {
+    display: inline-block; margin: 0 0 1.5rem; padding: .5rem 1.2rem; background: var(--white);
+    border: 3px solid var(--navy); border-radius: 14px; font-size: 1.1rem; pointer-events: auto;
+  }
+  @media (max-width: 700px) { .years { grid-template-columns: 1fr; } }
+
+
+  .jobs, .hacks { display: grid; gap: 1.75rem; grid-template-columns: 1fr; }
+  .hacks { grid-template-columns: repeat(3, 1fr); }
+  .job { background: var(--sand); padding: 1.5rem; }
+  .job.hack { background: var(--white); }
+  .job p.org { margin: .2rem 0 0; font-weight: 700; }
+  .job .when { display: inline-block; background: var(--white); border: 3px solid var(--navy); border-radius: 999px; font-weight: 800; font-size: .85rem; padding: .05rem .8rem; margin: .6rem 0 .5rem; }
+  .job.hack .when { background: var(--yellow); }
+  .job ul { margin: .3rem 0 0; padding-left: 1.2rem; }
+  .job li { margin: .3rem 0; }
+  @media (max-width: 800px) { .hacks { grid-template-columns: 1fr; } }
+
+  .contact { padding: 2.25rem; }
+  .contact h2 { margin-bottom: 1.5rem; }
+  .contact-email { display: block; margin: 0 0 1.5rem; font-family: var(--head); font-size: clamp(1.4rem, 5.5vw, 2.4rem); word-break: break-word; }
+
+  /* ---------- footer (sand) ---------- */
+  footer { position: relative; z-index: 1; margin-top: 3rem; }
+  footer svg { display: block; width: 100%; height: 60px; }
+  .sandbar { background: var(--sand); padding: 1.5rem 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 0; }
+  .sandbar .wrap { pointer-events: auto; padding: 0; }
+  .sandbar p { margin: .2rem 0; }
+
+  /* ---------- back to top ---------- */
+  #top-btn {
+    position: fixed; right: 1.25rem; bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); z-index: 20;
+    width: 3.4rem; height: 3.4rem; padding: 0; border-radius: 50%; border: 4px solid var(--navy);
+    background: radial-gradient(circle at 30% 28%, #fff 0 14%, var(--yellow) 45%); cursor: pointer;
+    box-shadow: 0 5px 0 var(--navy); display: grid; place-items: center;
+    opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none;
+    transition: opacity .2s, transform .2s, box-shadow .1s;
+  }
+  #top-btn.show { opacity: 1; transform: none; pointer-events: auto; }
+  #top-btn:hover { box-shadow: 0 7px 0 var(--navy); }
+  #top-btn:active { box-shadow: 0 1px 0 var(--navy); transform: translateY(4px); }
+  #top-btn svg { width: 1.5rem; height: 1.5rem; }
+</style>
+</head>
+<body>
+
+<div class="bubbles" id="bubbles" aria-hidden="true"></div>
+
+<div class="wrap" id="top">
+
+  <nav aria-label="Main">
+    <ul>
+      <li><a class="btn small yellow" href="#projects">Projects</a></li>
+      <li><a class="btn small yellow" href="#hackathons">Hackathons</a></li>
+      <li><a class="btn small yellow" href="#skills">Skills</a></li>
+      <li><a class="btn small yellow" href="#school">School</a></li>
+      <li><a class="btn small yellow" href="#contact">Contact</a></li>
+      <li><button class="btn small" id="theme-btn" type="button" aria-pressed="false">Deep sea mode</button></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="status">Open to summer 2027 data and software internships</div>
+    <h1><span>Jasneet</span><span>Gill</span></h1>
+    <div class="speech">
+      <p>Second-year Data Science student at Wilfrid Laurier University. I use Python and R to dig into messy data, find what is actually going on, and turn it into something you can click around in.</p>
+    </div>
+    <div class="actions">
+      <a class="btn yellow" href="JasneetGillResume.pdf">Download résumé</a>
+      <a class="btn" href="https://github.com/jasneetgill">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/jasneetkgill">LinkedIn</a>
+      <a class="btn coral" href="#contact">Hire me</a>
+    </div>
+  </header>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+
+      <article class="project feature sponge card">
+        <h3>Toronto Crime Dashboard</h3>
+        <p>Interactive dashboard exploring Toronto neighbourhood crime data from 2014 to 2025. I cleaned the data, ranked neighbourhoods by crime type and rate, charted 12-year trends, and compared crime types and how they changed over time. The Streamlit app has filters for crime type and year, plus a neighbourhood search with a per-area breakdown.</p>
+        <ul class="tags"><li>Python</li><li>pandas</li><li>matplotlib</li><li>Streamlit</li></ul>
+        <div class="links"><a class="btn small" href="https://github.com/jasneetgill/toronto-crime-data-analysis">Code</a></div>
+      </article>
+
+      <article class="project feature sponge card">
+        <h3>Impact of COVID-19 on NBA Game Outcomes</h3>
+        <p>Analyzed 10,000+ NBA games (2012 to 2024) to see how COVID-19 affected game outcomes and home-court advantage. I cleaned the data and engineered features like home/away classification, COVID indicators and margin categories. I built and compared linear regression models that predict point differential from shooting efficiency and game location, picked the best one using a train/validation/test split and RMSE, and charted the relationships with ggplot2.</p>
+        <ul class="tags"><li>R</li><li>ggplot2</li><li>Linear regression</li><li>Feature engineering</li></ul>
+        <div class="links"><a class="btn small" href="https://github.com/jasneetgill/nba-covid-home-court-analysis/blob/main/nba-analysis.Rmd">Code</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="hackathons">
+    <h2>Hackathons</h2>
+    <div class="hacks">
+      <article class="job hack card">
+        <h3>HackCanada, Build With AI</h3>
+        <p class="org">Wilfrid Laurier University</p>
+        <span class="when">Mar 2026</span>
+        <ul>
+          <li>Worked in a team to design and prototype an AI-driven solution in 24 hours.</li>
+          <li>Iterated fast on a working concept under strict time limits.</li>
+        </ul>
+      </article>
+      <article class="job hack card">
+        <h3>CxC Data Science Competition</h3>
+        <p class="org">University of Waterloo</p>
+        <span class="when">Feb 2026</span>
+        <ul>
+          <li>Analyzed real-world datasets to find patterns, trends and actionable insights.</li>
+          <li>Used data cleaning and exploratory analysis to build the solution.</li>
+        </ul>
+      </article>
+      <article class="job hack card">
+        <h3>Data Minds Challenge 2.0</h3>
+        <p class="org">Data competition</p>
+        <span class="when">Apr 2026</span>
+        <ul>
+          <li>Explored datasets to pull out insights that support decisions under time limits.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills">
+      <li class="skill sponge">Python</li>
+      <li class="skill sponge">R</li>
+      <li class="skill sponge">Java</li>
+      <li class="skill sponge">SQL</li>
+      <li class="skill sponge">C</li>
+      <li class="skill sponge">MySQL Workbench</li>
+      <li class="skill sponge">MATLAB</li>
+      <li class="skill sponge">Maple</li>
+    </ul>
+    <p class="also"><strong>Also used in projects:</strong> pandas, matplotlib, ggplot2, Streamlit, Excel, regression analysis</p>
+  </section>
+
+  <section id="school">
+    <h2>School</h2><br>
+    <p class="school"><strong>Wilfrid Laurier University</strong>, Honours BSc in Data Science, Sep 2025 to Apr 2029</p>
+    <div class="years">
+      <div class="year card">
+        <h3>Year 1</h3>
+        <ul class="courses">
+          <li>CP104</li><li>CP164</li><li>DATA100</li><li>MA123</li>
+          <li>MA120</li><li>MA103</li><li>BU111</li>
+        </ul>
+      </div>
+      <div class="year card">
+        <h3>Year 2</h3>
+        <ul class="courses">
+          <li>CP213</li><li>CP264</li><li>CP321</li><li>CP363</li>
+          <li>MA200</li><li>MA238</li><li>ST259</li><li>ST260</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact sponge card">
+      <h2>Hiring for an internship?</h2>
+      <a class="contact-email" href="mailto:jasneetgill277@gmail.com">jasneetgill277@gmail.com</a>
+      <a class="btn coral" href="mailto:jasneetgill277@gmail.com">Email me</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path style="fill: var(--sand)" d="M0,32 C160,62 340,2 520,28 C700,54 880,4 1060,30 C1240,54 1350,22 1440,32 L1440,60 L0,60 Z"/></svg>
+  <div class="sandbar">
+    <div class="wrap">
+      <p>© <span id="yr">2026</span> Jasneet Gill</p>
+      <p>Psst, the bubbles pop.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="top-btn" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#06284A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ----- theme toggle (daytime / deep sea) -----
+  var themeBtn = document.getElementById('theme-btn');
+  function currentTheme() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function labelTheme() {
+    var dark = currentTheme() === 'dark';
+    themeBtn.textContent = dark ? 'Daytime mode' : 'Deep sea mode';
+    themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+  labelTheme();
+  themeBtn.addEventListener('click', function () {
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    labelTheme();
+  });
+
+  // ----- back to top -----
+  var topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', function () {
+    topBtn.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+  topBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  // ----- bubbles: they rise, click or tap to pop -----
+  if (reduce) return;
+  var layer = document.getElementById('bubbles');
+  var count = window.innerWidth < 640 ? 7 : 13;
+
+  function spawn(initialDelay) {
+    var b = document.createElement('div');
+    var size = 18 + Math.random() * 46;
+    b.className = 'bubble';
+    b.style.width = b.style.height = size + 'px';
+    b.style.left = (Math.random() * 96) + '%';
+    b.style.setProperty('--dur', (11 + Math.random() * 12).toFixed(1) + 's');
+    b.style.setProperty('--delay', (initialDelay != null ? initialDelay : Math.random() * 2).toFixed(1) + 's');
+    b.style.setProperty('--drift', ((Math.random() - 0.5) * 120).toFixed(0) + 'px');
+    function pop() {
+      var r = b.getBoundingClientRect();
+      b.style.animation = 'none';
+      b.style.bottom = 'auto';
+      b.style.left = r.left + 'px';
+      b.style.top = r.top + 'px';
+      b.style.transform = 'none';
+      void b.offsetWidth;
+      b.classList.add('pop');
+      b.style.animation = '';
+      b.addEventListener('animationend', function () {
+        b.remove();
+        setTimeout(function () { spawn(0); }, 600 + Math.random() * 1500);
+      }, { once: true });
+    }
+    b.addEventListener('pointerdown', pop);
+    b.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') pop(); });
+    layer.appendChild(b);
+  }
+  for (var i = 0; i < count; i++) spawn(Math.random() * 12);
+})();
+</script>
+</body>
+</html>
